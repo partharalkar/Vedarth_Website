@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vedarth Solutions - Enterprise ERPNext Implementation Partner</title>
+    <meta name="description" content="Your trusted ERPNext implementation partner specializing in manufacturing solutions. 50+ successful projects across diverse industries.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        html { 
+            scroll-behavior: smooth;
+        }
+        
+        .animate-fade-in { 
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .animate-slide-up { 
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        .animate-slide-up-delay { 
+            animation: slideUp 0.8s ease-out 0.2s both;
+        }
+        
+        .animate-slide-up-delay-2 { 
+            animation: slideUp 0.8s ease-out 0.4s both;
+        }
+        
+        .animate-fade-in-delay { 
+            animation: fadeIn 0.8s ease-out 0.6s both;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0); 
+            }
+        }
+        
+        .backdrop-blur-xl { 
+            backdrop-filter: blur(24px);
+        }
+        
+        /* Mobile menu animation */
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .mobile-menu.open {
+            max-height: 300px;
+        }
+        
+        /* Smooth hover transitions */
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+        <style>
+  /* Featured Blog / Media Section */
+  .featured-blog {
+    background: linear-gradient(to bottom, #ffffff, #f9fafb);
+  }
+
+  .featured-badge {
+    display: inline-block;
+    background: #111827;
+    color: #ffffff;
+    padding: 6px 14px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    margin-bottom: 16px;
+  }
+
+  .featured-image {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .featured-image:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 25px 40px rgba(0, 0, 0, 0.15);
+  }
+</style>
+
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Add root div for React compatibility -->
+    <div id="root">
+ <header class="fixed top-0 w-full bg-white/80 backdrop-blur-xl border-b border-gray-100/50 z-50 transition-all duration-300">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="flex justify-between items-center h-16">
+                    <!--<div class="flex items-center">
+                        <i data-lucide="settings" class="h-6 w-6 text-gray-900 mr-3"></i>
+                        <span class="text-xl font-medium text-gray-900 tracking-tight">Vedarth Solutions</span>
+                    </div>-->
+                    
+                    <nav class="flex items-center space-x-8">
+                       
+
+                        <button onclick="scrollToSection('home')" class="text-gray-600 hover:text-gray-900 transition-colors duration-200 text-sm font-medium">
+                            Home
+                        </button>
+                        <button onclick="scrollToSection('about')" class="text-gray-600 hover:text-gray-900 transition-colors duration-200 text-sm font-medium">
+                            About
+                        </button>
+                        <button onclick="scrollToSection('services')" class="text-gray-600 hover:text-gray-900 transition-colors duration-200 text-sm font-medium">
+                            Services
+                        </button>
+                        <button onclick="scrollToSection('portfolio')" class="text-gray-600 hover:text-gray-900 transition-colors duration-200 text-sm font-medium">
+                            Portfolio
+                        </button>
+                        <button onclick="scrollToSection('team'); closeMobileMenu();" class="text-gray-600 hover:text-gray-900 transition-colors duration-200 text-sm font-medium">
+                             Team
+                        </button>
+                        <button onclick="scrollToSection('blogs'); closeMobileMenu();" class="text-gray-600 hover:text-gray-900 transition-colors duration-200 text-sm font-medium">
+                             Blogs
+                        </button>
+
+                        <button onclick="scrollToSection('contact')" class="bg-gray-900 text-white px-4 py-2 rounded-full hover:bg-gray-800 transition-all duration-200 text-sm font-medium">
+                            Contact
+                        </button>
+                    </nav>
+
+                    <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                        <i data-lucide="menu" class="h-5 w-5"></i>
+                    </button>
+                </div>
+
+            <nav id="mobile-menu" class="mobile-menu hidden md:hidden border-t border-gray-100 mt-4">
+                    <div class="flex flex-col space-y-4 py-4">
+                        <button onclick="scrollToSection('home'); closeMobileMenu();" class="text-gray-600 hover:text-gray-900 transition-colors duration-200 text-left text-sm font-medium">
+                            Home
+                        </button>
+                        <button onclick="scrollToSection('about'); closeMobileMenu();" class="text-gray-600 hover:text-gray-900 transition-colors duration-200 text-left text-sm font-medium">
+                            About
+                        </button>
+                        <button onclick="scrollToSection('services'); closeMobileMenu();" class="text-gray-600 hover:text-gray-900 transition-colors duration-200 text-left text-sm font-medium">
+                            Services
+                        </button>
+                        <button onclick="scrollToSection('portfolio'); closeMobileMenu();" class="text-gray-600 hover:text-gray-900 transition-colors duration-200 text-left text-sm font-medium">
+                            Portfolio
+                        </button>
+                        <a href="https://www.vedarthsolutions.com/team" onclick="closeMobileMenu();" class="text-gray-600 hover:text-gray-900 transition-colors duration-200 text-left text-sm font-medium">
+    Team
+</a>
+
+                        <button onclick="scrollToSection('blogs'); closeMobileMenu();" class="bg-gray-900 text-white px-4 py-2 rounded-full hover:bg-gray-800 transition-all duration-200 text-sm font-medium w-fit">
+                            Blogs
+                        </button>
+                        <button onclick="scrollToSection('contact'); closeMobileMenu();" class="bg-gray-900 text-white px-4 py-2 rounded-full hover:bg-gray-800 transition-all duration-200 text-sm font-medium w-fit">
+                            Contact
+                        </button>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <section id="blogs" class="featured-blog py-32">
+  <div class="max-w-6xl mx-auto px-6">
+    
+    <div class="text-center mb-16">
+      <span class="featured-badge">Media Recognition</span>
+      <h2 class="text-4xl md:text-5xl font-light text-gray-900 mb-6 tracking-tight">
+        Featured in Insights Success Magazine
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
+        A proud milestone for Vedarth Solutions, recognizing leadership and innovation in the
+        open-source ERP ecosystem.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      
+      <!-- Magazine Image -->
+      <div class="flex justify-center">
+        <img 
+          src="/files/Insights_Success_Magazine_Satish_Aralkar.png"
+          alt="Insights Success Magazine - Satish Aralkar"
+          class="featured-image rounded-2xl shadow-xl max-w-sm w-full"
+        />
+      </div>
+
+      <!-- Content -->
+      <div>
+        <h3 class="text-3xl font-light text-gray-900 mb-6 tracking-tight">
+          Transforming India’s ERP Landscape
+        </h3>
+
+        <p class="text-gray-600 font-light leading-relaxed mb-6 text-lg">
+          Our Founder, <strong>Satish Aralkar</strong>, has been featured in
+          <strong>Insights Success Magazine</strong> for his contribution to transforming
+          India’s ERP landscape through open-source innovation.
+        </p>
+
+        <p class="text-gray-600 font-light leading-relaxed mb-6 text-lg">
+          The article highlights his journey from decades of SAP and Oracle implementations
+          to building scalable, cost-effective ERPNext solutions for manufacturing enterprises.
+          It reflects Vedarth Solutions’ commitment to delivering enterprise-grade ERP systems
+          with transparency, flexibility, and long-term value.
+        </p>
+
+        <p class="text-gray-600 font-light leading-relaxed mb-10 text-lg">
+          This recognition reinforces our belief that open-source ERP, when implemented with
+          deep domain expertise and proven methodologies, can compete with and surpass
+          traditional enterprise systems.
+        </p>
+
+        <a
+          href="https://insightssuccessmagazine.com/satish-aralkar-transforming-indias-erp-landscape-through-open-source-innovation-sap-to-erpnext/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center bg-gray-900 text-white px-8 py-4 rounded-full hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl"
+        >
+          Read Full Article →
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+        <section id="home" class="pt-32 bg-gradient-to-b from-gray-50 to-white min-h-screen flex items-center">
+
+            <div class="max-w-6xl mx-auto px-6 py-20">
+                <div class="text-center max-w-4xl mx-auto">
+                    <div class="inline-flex items-center bg-gray-100 rounded-full px-4 py-2 mb-8 animate-fade-in">
+                    
+                        <span class="text-gray-600 text-sm font-medium">Enterprise ERPNext Implementation Partner</span>
+                    </div>
+                    
+                    <h1 class="text-5xl md:text-7xl font-light text-gray-900 mb-6 leading-tight tracking-tight animate-slide-up">
+                        Transform Your Business with <b>ERP Experts</b>
+
+                        <br />
+                        <!--<span class="font-medium">Business</span>-->
+                    </h1>
+                    
+                    <p class="text-xl md:text-2xl text-gray-600 mb-12 leading-relaxed font-light max-w-3xl mx-auto animate-slide-up-delay">
+                       With over 25 years of experience, our team of SAP and Oracle experts has successfully delivered 50+ global implementations, including projects for Fortune 500 companies. Leveraging proven industry best practices, we now bring the same world-class expertise to ERPNext—helping businesses streamline operations, reduce costs, and accelerate digital transformation.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 animate-slide-up-delay-2">
+                        <button onclick="scrollToSection('contact')" class="bg-gray-900 text-white px-8 py-4 rounded-full hover:bg-gray-800 transition-all duration-300 flex items-center group shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                            Start Your Project 
+                            <i data-lucide="arrow-right" class="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200"></i>
+                        </button>
+                        <button onclick="scrollToSection('about')" class="text-gray-900 px-8 py-4 rounded-full border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all duration-300">
+                            Learn More
+                        </button>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto animate-fade-in-delay">
+                        <div class="text-center">
+                            <div class="text-3xl font-light text-gray-900 mb-2">50+</div>
+                            <div class="text-gray-600 text-sm">Projects Completed</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-light text-gray-900 mb-2">100%</div>
+                            <div class="text-gray-600 text-sm">AMS Support</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-light text-gray-900 mb-2">15+</div>
+                            <div class="text-gray-600 text-sm">Industries Served</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-32 bg-white">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-left mb-20">
+                    <h2 class="text-4xl md:text-5xl font-light text-gray-900 mb-6 tracking-tight text-center">
+    The Vedarth Difference
+</h2>
+
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
+                        Founded on the principles of precision and excellence, Vedarth Solutions has become the trusted partner for manufacturing enterprises seeking digital transformation. Our methodology combines deep industry knowledge with cutting-edge technology, delivering solutions that don't just meet requirements - they exceed expectations. 
+                        
+                        <br>As an <strong>Official Frappe Partner</strong>, every ERPNext implementation is crafted with the same attention to detail and commitment to quality that defines the world's most successful manufacturing operations. We ensure our clients achieve sustainable success with scalable and efficient systems.</br>
+                    </p>
+                </div>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+  
+  <!-- Manufacturing Expertise -->
+  <a href="https://www.youtube.com/watch?v=vLikUXfDy9o&t=598s" 
+     class="p-6 rounded-lg shadow hover:shadow-lg transition duration-300 block">
+      <div class="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-md mb-4">
+          <!-- SVG ICON --><i data-lucide="factory" class="h-6 w-6 text-gray-700"></i>
+      </div>
+      <h3 class="font-semibold text-lg">Manufacturing Expertise</h3>
+      <p class="mt-2 text-gray-600 text-sm">
+          Deep understanding of manufacturing processes, inventory management, and production planning.
+      </p>
+  </a>
+
+  <!-- Experienced Team -->
+  <a href="#team" 
+     class="p-6 rounded-lg shadow hover:shadow-lg transition duration-300 block">
+      <div class="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-md mb-4">
+          <!-- SVG ICON --><i data-lucide="users" class="h-6 w-6 text-gray-700"></i>
+      </div>
+      <h3 class="font-semibold text-lg">Experienced Team</h3>
+      <p class="mt-2 text-gray-600 text-sm">
+          Skilled consultants with years of ERPNext implementation experience across industries.
+      </p>
+  </a>
+
+  <!-- Proven Results -->
+  <a href="#team" 
+     class="p-6 rounded-lg shadow hover:shadow-lg transition duration-300 block">
+      <div class="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-md mb-4">
+          <!-- SVG ICON --><i data-lucide="check-circle" class="h-6 w-6 text-gray-700"></i>
+      </div>
+      <h3 class="font-semibold text-lg">Proven Results</h3>
+      <p class="mt-2 text-gray-600 text-sm">
+          50+ successful implementations with 100% client satisfaction and lasting partnerships.
+      </p>
+  </a>
+
+  <!-- Rapid Deployment -->
+  <a href="#team" 
+     class="p-6 rounded-lg shadow hover:shadow-lg transition duration-300 block">
+      <div class="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-md mb-4">
+          <!-- SVG ICON --><i data-lucide="zap" class="h-6 w-6 text-gray-700"></i>
+      </div>
+      <h3 class="font-semibold text-lg">Rapid Deployment</h3>
+      <p class="mt-2 text-gray-600 text-sm">
+          Streamlined methodology that reduces implementation time while ensuring quality.
+      </p>
+  </a>
+
+</div>
+
+
+                <div class="bg-gray-50 rounded-3xl p-12 lg:p-16">
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h3 class="text-3xl font-light text-gray-900 mb-6 tracking-tight">
+                                Why Choose Vedarth Solutions?
+                            </h3>
+                            <p class="text-gray-600 mb-8 font-light leading-relaxed text-lg">
+                                Our manufacturing focus gives us unique insights into industry challenges and opportunities. We don't just implement software – we optimize your entire business process.
+                            </p>
+                            <div class="space-y-4">
+                                <div class="flex items-center">
+                                    <div class="w-1.5 h-1.5 bg-gray-400 rounded-full mr-4"></div>
+                                    <span class="text-gray-700 font-light">Industry-specific customizations</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-1.5 h-1.5 bg-gray-400 rounded-full mr-4"></div>
+                                    <span class="text-gray-700 font-light">Comprehensive training and support</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-1.5 h-1.5 bg-gray-400 rounded-full mr-4"></div>
+                                    <span class="text-gray-700 font-light">Post-implementation optimization</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-1.5 h-1.5 bg-gray-400 rounded-full mr-4"></div>
+                                    <span class="text-gray-700 font-light">Scalable solutions for growth</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-8 rounded-2xl shadow-sm">
+                            <h4 class="text-xl font-medium text-gray-900 mb-4">Our Mission</h4>
+                            <p class="text-gray-600 mb-6 font-light leading-relaxed">
+                                To empower manufacturing businesses with robust, scalable ERP solutions that drive operational excellence and sustainable growth.
+                            </p>
+                            <div class="flex items-center justify-between text-sm text-gray-500 font-light">
+                                <span>Since 2018</span>
+                                <span>•</span>
+                                <span>50+ Projects</span>
+                                <span>•</span>
+                                <span>100% Success</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="py-32 bg-gray-50">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center mb-20">
+                    <h2 class="text-4xl md:text-5xl font-light text-gray-900 mb-6 tracking-tight">
+                        Our Services
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
+                        Comprehensive ERPNext implementation services designed specifically for manufacturing excellence
+                    </p>
+                </div>
+        <div class="fixed top-4 right-4 z-50">
+            <img src="/files/Frappe-partner-logo.png" alt="Frappe Partner" class="h-10 shadow-md rounded" />
+          </div>
+
+        <div class="fixed top-4 left-4 z-50">
+            <img src="/files/Vedarth%20Logo.jpeg" alt="Vedarth Solutions" class="h-10 shadow-md rounded" />
+          </div>
+
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+                    
+                    <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 group hover-lift">
+                        <div class="w-14 h-14 bg-gray-100 rounded-xl mb-6 flex items-center justify-center group-hover:bg-gray-200 transition-colors duration-300">
+                            <i data-lucide="settings" class="h-6 w-6 text-gray-700"></i>
+                        </div>
+                        <h3 class="text-xl font-medium text-gray-900 mb-3">ERPNext Implementation</h3>
+                        <p class="text-gray-600 mb-6 font-light leading-relaxed">Fresh ERPNext setup and configuration tailored to your business needs for a smooth digital transformation journey.</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center text-sm text-gray-600">
+                                <div class="w-1 h-1 bg-gray-400 rounded-full mr-3"></div>
+                                <span class="font-light">End-to-end system setup</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <div class="w-1 h-1 bg-gray-400 rounded-full mr-3"></div>
+                                <span class="font-light">Business process mapping</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <div class="w-1 h-1 bg-gray-400 rounded-full mr-3"></div>
+                                <span class="font-light">Module configuration & customization</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <div class="w-1 h-1 bg-gray-400 rounded-full mr-3"></div>
+                                <span class="font-light">Master data preparation & migration</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <div class="w-1 h-1 bg-gray-400 rounded-full mr-3"></div>
+                                <span class="font-light">User training & change management</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="https://demo15.vedarthsolutions.com/homepage" style="text-decoration: none; color: inherit;">
+              <div class="erp-card">
+            <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 group hover-lift">
+                        <div class="w-14 h-14 bg-gray-100 rounded-xl mb-6 flex items-center justify-center group-hover:bg-gray-200 transition-colors duration-300">
+                            <i data-lucide="users" class="h-6 w-6 text-gray-700"></i>
+                        </div>
+                        <h3 class="text-xl font-medium text-gray-900 mb-3">SAP ECC to ERPNext Migration</h3>
+                        <p class="text-gray-600 mb-6 font-light leading-relaxed">Expert-led migration services to transition your legacy SAP ECC system to modern, flexible ERPNext infrastructure.</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center text-sm text-gray-600">
+                                <div class="w-1 h-1 bg-gray-400 rounded-full mr-3"></div>
+                                <span class="font-light">Data extraction & transformation</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <div class="w-1 h-1 bg-gray-400 rounded-full mr-3"></div>
+                                <span class="font-light">Custom mapping of modules</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <div class="w-1 h-1 bg-gray-400 rounded-full mr-3"></div>
+                                <span class="font-light">User & admin onboarding</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <div class="w-1 h-1 bg-gray-400 rounded-full mr-3"></div>
+                                <span class="font-light">Downtime-free deployment
+
+            </span>
+                            </div>
+                        </div>
+                    </div>
+              </div>
+            </a>
+
+                    <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 group hover-lift">
+                        <div class="w-14 h-14 bg-gray-100 rounded-xl mb-6 flex items-center justify-center group-hover:bg-gray-200 transition-colors duration-300">
+                            <i data-lucide="database" class="h-6 w-6 text-gray-700"></i>
+                        </div>
+                        <h3 class="text-xl font-medium text-gray-900 mb-3">MRP (Material Requirements Planning)</h3>
+                        <p class="text-gray-600 mb-6 font-light leading-relaxed">Smart automation of material planning on ERPNext to streamline production, reduce costs, and save time.</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center text-sm text-gray-600">
+                                <div class="w-1 h-1 bg-gray-400 rounded-full mr-3"></div>
+                                <span class="font-light">Automated demand forecasting</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <div class="w-1 h-1 bg-gray-400 rounded-full mr-3"></div>
+                                <span class="font-light">Procurement & production planning</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <div class="w-1 h-1 bg-gray-400 rounded-full mr-3"></div>
+                                <span class="font-light">Real-time inventory visibility</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <div class="w-1 h-1 bg-gray-400 rounded-full mr-3"></div>
+                                <span class="font-light">Cost and time savings</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 group hover-lift">
+                        <div class="w-14 h-14 bg-gray-100 rounded-xl mb-6 flex items-center justify-center group-hover:bg-gray-200 transition-colors duration-300">
+                            <i data-lucide="users" class="h-6 w-6 text-gray-700"></i>
+                        </div>
+                        <h3 class="text-xl font-medium text-gray-900 mb-3">Dealer Management System</h3>
+                        <p class="text-gray-600 mb-6 font-light leading-relaxed">A centralized portal to connect dealers with streamlined operations, better visibility, and faster decision-making</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center text-sm text-gray-600">
+                                <div class="w-1 h-1 bg-gray-400 rounded-full mr-3"></div>
+                                <span class="font-light">Dealer registration & onboarding</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <div class="w-1 h-1 bg-gray-400 rounded-full mr-3"></div>
+                                <span class="font-light">Digital MOU creation & approvals</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <div class="w-1 h-1 bg-gray-400 rounded-full mr-3"></div>
+                                <span class="font-light">Scheme & budget management</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <div class="w-1 h-1 bg-gray-400 rounded-full mr-3"></div>
+                                <span class="font-light">Dealer payment pending tracking</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <div class="w-1 h-1 bg-gray-400 rounded-full mr-3"></div>
+                                <span class="font-light">Real-time dashboards & performance insights</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 group hover-lift">
+                        <div class="w-14 h-14 bg-gray-100 rounded-xl mb-6 flex items-center justify-center group-hover:bg-gray-200 transition-colors duration-300">
+                            <i data-lucide="bar-chart-3" class="h-6 w-6 text-gray-700"></i>
+                        </div>
+                        <h3 class="text-xl font-medium text-gray-900 mb-3">Supplier Portal</h3>
+                        <p class="text-gray-600 mb-6 font-light leading-relaxed">Developed Supplier Portal on ERPNext for seamless supplier collaboration, transaction management, and supply chain efficiency.</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center text-sm text-gray-600">
+                                <div class="w-1 h-1 bg-gray-400 rounded-full mr-3"></div>
+                                <span class="font-light">Supplier registration & Onboarding</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <div class="w-1 h-1 bg-gray-400 rounded-full mr-3"></div>
+                                <span class="font-light">Purchase order visibility & confirmations</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <div class="w-1 h-1 bg-gray-400 rounded-full mr-3"></div>
+                                <span class="font-light">Advance Shipping Notification (ASN)</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <div class="w-1 h-1 bg-gray-400 rounded-full mr-3"></div>
+                                <span class="font-light"> Streamlined procurement with real-time collaboration, invoice-to-payment tracking, and cost savings</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 group hover-lift">
+                        <div class="w-14 h-14 bg-gray-100 rounded-xl mb-6 flex items-center justify-center group-hover:bg-gray-200 transition-colors duration-300">
+                            <i data-lucide="headphones" class="h-6 w-6 text-gray-700"></i>
+                        </div>
+                        <h3 class="text-xl font-medium text-gray-900 mb-3">Ongoing Support</h3>
+                        <p class="text-gray-600 mb-6 font-light leading-relaxed">Continuous support and maintenance to keep your ERPNext system running smoothly.</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center text-sm text-gray-600">
+                                <div class="w-1 h-1 bg-gray-400 rounded-full mr-3"></div>
+                                <span class="font-light">24/7 support</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <div class="w-1 h-1 bg-gray-400 rounded-full mr-3"></div>
+                                <span class="font-light">System updates</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <div class="w-1 h-1 bg-gray-400 rounded-full mr-3"></div>
+                                <span class="font-light">Performance optimization</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <div class="w-1 h-1 bg-gray-400 rounded-full mr-3"></div>
+                                <span class="font-light">Issue resolution</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-900 rounded-3xl p-12 lg:p-16 text-center">
+                    <h3 class="text-3xl md:text-4xl font-light text-white mb-6 tracking-tight">
+                        Ready to Transform Your Operations?
+                    </h3>
+                    <p class="text-gray-300 mb-8 max-w-2xl mx-auto font-light leading-relaxed text-lg">
+                        Let's discuss how our ERPNext implementation services can streamline your manufacturing processes.
+                    </p>
+                    <button onclick="scrollToSection('contact')" class="bg-white text-gray-900 px-8 py-4 rounded-full font-medium hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                        Get Started Today
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="py-32 bg-white">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center mb-20">
+                    <h2 class="text-4xl md:text-5xl font-light text-gray-900 mb-6 tracking-tight">
+                        Our Portfolio
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
+                        Proven success across diverse manufacturing industries with measurable results
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gray-100 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+                            <i data-lucide="check-circle" class="h-7 w-7 text-gray-700"></i>
+                        </div>
+                        <div class="text-3xl font-light text-gray-900 mb-2">50+</div>
+                        <div class="text-gray-600 font-light">Projects Completed</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gray-100 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+                            <i data-lucide="building" class="h-7 w-7 text-gray-700"></i>
+                        </div>
+                        <div class="text-3xl font-light text-gray-900 mb-2">15+</div>
+                        <div class="text-gray-600 font-light">Industries Served</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gray-100 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+                            <i data-lucide="users" class="h-7 w-7 text-gray-700"></i>
+                        </div>
+                        <div class="text-3xl font-light text-gray-900 mb-2">500+</div>
+                        <div class="text-gray-600 font-light">Users Trained</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gray-100 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+                            <i data-lucide="calendar" class="h-7 w-7 text-gray-700"></i>
+                        </div>
+                        <div class="text-3xl font-light text-gray-900 mb-2">25+</div>
+                        <div class="text-gray-600 font-light">Years Experience</div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 rounded-3xl p-12 lg:p-16 mb-20">
+                    <h3 class="text-3xl font-light text-gray-900 mb-12 text-center tracking-tight">Industries We Serve</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="bg-white p-4 rounded-xl shadow-sm flex items-center hover:shadow-md transition-shadow duration-300">
+                            <i data-lucide="building" class="h-4 w-4 text-gray-600 mr-3"></i>
+                            <span class="text-gray-700 font-light">Automotive Manufacturing</span>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm flex items-center hover:shadow-md transition-shadow duration-300">
+                            <i data-lucide="building" class="h-4 w-4 text-gray-600 mr-3"></i>
+                            <span class="text-gray-700 font-light">Textile & Apparel</span>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm flex items-center hover:shadow-md transition-shadow duration-300">
+                            <i data-lucide="building" class="h-4 w-4 text-gray-600 mr-3"></i>
+                            <span class="text-gray-700 font-light">Pharmaceutical</span>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm flex items-center hover:shadow-md transition-shadow duration-300">
+                            <i data-lucide="building" class="h-4 w-4 text-gray-600 mr-3"></i>
+                            <span class="text-gray-700 font-light">Food & Beverage</span>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm flex items-center hover:shadow-md transition-shadow duration-300">
+                            <i data-lucide="building" class="h-4 w-4 text-gray-600 mr-3"></i>
+                            <span class="text-gray-700 font-light">Electronics</span>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm flex items-center hover:shadow-md transition-shadow duration-300">
+                            <i data-lucide="building" class="h-4 w-4 text-gray-600 mr-3"></i>
+                            <span class="text-gray-700 font-light">Chemical Processing</span>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm flex items-center hover:shadow-md transition-shadow duration-300">
+                            <i data-lucide="building" class="h-4 w-4 text-gray-600 mr-3"></i>
+                            <span class="text-gray-700 font-light">Furniture Manufacturing</span>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm flex items-center hover:shadow-md transition-shadow duration-300">
+                            <i data-lucide="building" class="h-4 w-4 text-gray-600 mr-3"></i>
+                            <span class="text-gray-700 font-light">Metal Fabrication</span>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm flex items-center hover:shadow-md transition-shadow duration-300">
+                            <i data-lucide="building" class="h-4 w-4 text-gray-600 mr-3"></i>
+                            <span class="text-gray-700 font-light">Packaging Solutions</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-3xl font-light text-gray-900 mb-12 text-center tracking-tight">Project Highlights</h3>
+                    <div class="grid lg:grid-cols-3 gap-8">
+                        <div class="bg-gray-50 rounded-2xl p-8 hover:bg-gray-100 transition-colors duration-300">
+                            <h4 class="text-xl font-medium text-gray-900 mb-4">Automotive Excellence</h4>
+                            <p class="text-gray-600 mb-6 font-light leading-relaxed">Complete ERPNext deployment for automotive parts manufacturer with 200+ users across multiple locations.</p>
+                            <div class="space-y-3">
+                                <h5 class="font-medium text-gray-900 text-sm">Key Results:</h5>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i data-lucide="check-circle" class="h-3 w-3 text-gray-400 mr-3"></i>
+                                    <span class="font-light">40% reduction in inventory costs</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i data-lucide="check-circle" class="h-3 w-3 text-gray-400 mr-3"></i>
+                                    <span class="font-light">60% faster order processing</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i data-lucide="check-circle" class="h-3 w-3 text-gray-400 mr-3"></i>
+                                    <span class="font-light">Real-time production tracking</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-2xl p-8 hover:bg-gray-100 transition-colors duration-300">
+                            <h4 class="text-xl font-medium text-gray-900 mb-4">Textile Transformation</h4>
+                            <p class="text-gray-600 mb-6 font-light leading-relaxed">Multi-location ERPNext implementation for leading textile manufacturer with complex supply chain.</p>
+                            <div class="space-y-3">
+                                <h5 class="font-medium text-gray-900 text-sm">Key Results:</h5>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i data-lucide="check-circle" class="h-3 w-3 text-gray-400 mr-3"></i>
+                                    <span class="font-light">Unified inventory management</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i data-lucide="check-circle" class="h-3 w-3 text-gray-400 mr-3"></i>
+                                    <span class="font-light">Automated quality control</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i data-lucide="check-circle" class="h-3 w-3 text-gray-400 mr-3"></i>
+                                    <span class="font-light">Streamlined production planning</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-2xl p-8 hover:bg-gray-100 transition-colors duration-300">
+                            <h4 class="text-xl font-medium text-gray-900 mb-4">Pharmaceutical Compliance</h4>
+                            <p class="text-gray-600 mb-6 font-light leading-relaxed">ERPNext customization for pharmaceutical company with strict regulatory compliance requirements.</p>
+                            <div class="space-y-3">
+                                <h5 class="font-medium text-gray-900 text-sm">Key Results:</h5>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i data-lucide="check-circle" class="h-3 w-3 text-gray-400 mr-3"></i>
+                                    <span class="font-light">100% regulatory compliance</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i data-lucide="check-circle" class="h-3 w-3 text-gray-400 mr-3"></i>
+                                    <span class="font-light">Batch tracking automation</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i data-lucide="check-circle" class="h-3 w-3 text-gray-400 mr-3"></i>
+                                    <span class="font-light">Quality control optimization</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<section id="team" class="py-32 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-light text-gray-900 mb-6 tracking-tight">
+                Meet Our Team
+            </h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
+                The experts driving successful ERPNext implementations with decades of experience.
+            </p>
+        </div>
+
+        <!-- Main Founder -->
+        <div class="text-center mb-20">
+            <img src="/files/Satish_sametime.png" alt="Satish Aralkar" class="w-32 h-32 md:w-40 md:h-40 rounded-full mx-auto mb-6 object-cover shadow-md">
+            <h3 class="text-2xl font-semibold text-gray-900">Satish Aralkar</h3>
+            <p class="text-gray-700 font-medium mt-2">Founder - Vedarth Solutions,<br>Supply Chain and Manufacturing Consultant</p>
+            <p class="text-gray-500 text-sm mt-3 max-w-xl mx-auto">
+                27 Years of Industry Experience in Manufacturing, SAP Implementations. Worked for Tata Motors, Satyam Computers, and IBM.
+            </p>
+        </div>
+
+        <!-- Team Grid -->
+        <div class="grid md:grid-cols-3 gap-12 text-center">
+            <!-- Member 1 -->
+            <div>
+                <img src="/files/Sushil_photo.jpeg" alt="Sushil Katkade" class="w-28 h-28 md:w-32 md:h-32 rounded-full mx-auto mb-6 object-cover shadow-md">
+                <h3 class="text-xl font-semibold text-gray-900">Sushil Katkade</h3>
+                <p class="text-gray-700 font-medium mt-2">ERP Solution Architect</p>
+                <p class="text-gray-500 text-sm mt-3">
+                    25 years of experience as ERP Solution Architect and Hybrid Cloud Integrarion architect.
+                    Ex IBM Architect and implemented multiple ERP solutions across North America
+                </p>
+            </div>
+
+           
+            <!-- Member 1 -->
+            <div>
+                <img src="/files/Pramod Limaye.png" alt="Pramod Limaye" class="w-28 h-28 md:w-32 md:h-32 rounded-full mx-auto mb-6 object-cover shadow-md">
+                <h3 class="text-xl font-semibold text-gray-900">Pramod Limaye</h3>
+                <p class="text-gray-700 font-medium mt-2">Accounts and Finance Expert of SAP and ERPNext</p>
+                <p class="text-gray-500 text-sm mt-3">
+                    36 Years of Experience. Worked for Tata Technologies & IBM.
+                </p>
+            </div>
+
+            <!-- Member 2 -->
+            <div>
+                <img src="/files/Sachin Dhole.png" alt="Sachin Dhole" class="w-28 h-28 md:w-32 md:h-32 rounded-full mx-auto mb-6 object-cover shadow-md">
+                <h3 class="text-xl font-semibold text-gray-900">Sachin Dhole</h3>
+                <p class="text-gray-700 font-medium mt-2">Human Resource (HR) Expert of Oracle and ERPNext</p>
+                <p class="text-gray-500 text-sm mt-3">
+                    26 Years of Experience. Worked for Oracle Corporation and IBM.
+                </p>
+            </div>
+
+            <!-- Member 3 -->
+            <div>
+                <img src="/files/Prashant telang.png" alt="Prashant Telang" class="w-28 h-28 md:w-32 md:h-32 rounded-full mx-auto mb-6 object-cover shadow-md">
+                <h3 class="text-xl font-semibold text-gray-900">Prashant Telang</h3>
+                <p class="text-gray-700 font-medium mt-2">Project Management Expert of Software Developments and ERPNext</p>
+                <p class="text-gray-500 text-sm mt-3">
+                    25 Years of Experience. Worked for Satyam Computers.
+                </p>
+            </div>
+            <!-- Member 4 -->
+            
+            <div>
+                <img src="/files/Parth_Photo.jpeg" alt="Aditya Das" class="w-28 h-28 md:w-32 md:h-32 rounded-full mx-auto mb-6 object-cover shadow-md">
+                <h3 class="text-xl font-semibold text-gray-900">Parth Aralkar</h3>
+                <p class="text-gray-700 font-medium mt-2">AI & ERPNext Innovation Consultant</p>
+                <p class="text-gray-500 text-sm mt-3">
+                    With 8 years of domain experience across the Automotive, Retail, and Manufacturing industries, along with strong expertise in Business Intelligence, ERPNext, and AI-driven solutions.
+                </p>
+            </div>
+                        <!-- Member 5 -->
+             <div>
+                <img src="/files/CV_Picture.jpeg" alt="Aditya Das" class="w-28 h-28 md:w-32 md:h-32 rounded-full mx-auto mb-6 object-cover shadow-md">
+                <h3 class="text-xl font-semibold text-gray-900">Shreya Aralkar</h3>
+                <p class="text-gray-700 font-medium mt-2">ERPNext HR & Finance Specialist</p>
+                <p class="text-gray-500 text-sm mt-3">
+                  With 3+ years of hands-on expertise in ERPNext implementations, Shreya specializes in streamlining HR and Finance processes through tailored ERP solutions.
+                </p>
+            </div>
+             <!-- Member 6 -->
+            <div>
+                <img src="/files/Aditya_Das.jpeg" alt="Aditya Das" class="w-28 h-28 md:w-32 md:h-32 rounded-full mx-auto mb-6 object-cover shadow-md">
+                <h3 class="text-xl font-semibold text-gray-900">Aditya Das</h3>
+                <p class="text-gray-700 font-medium mt-2">Senior ERPNext Consultant</p>
+                <p class="text-gray-500 text-sm mt-3">
+                    3 Years of Experience in developement.
+                    Expert in implementing, customizing, and optimizing ERPNext solutions for businesses.
+                </p>
+            </div>
+            <!-- Member 7 -->
+            <div>
+                <img src="/files/Balaji_photo.jpeg" alt="Balaji Shinde" class="w-28 h-28 md:w-32 md:h-32 rounded-full mx-auto mb-6 object-cover shadow-md">
+                <h3 class="text-xl font-semibold text-gray-900">Balaji Shinde</h3>
+                <p class="text-gray-700 font-medium mt-2">Senior ERPNext Consultant</p>
+                <p class="text-gray-500 text-sm mt-3">
+                    3 Years of Experience in developement.Expert in implementing, customizing, and optimizing ERPNext solutions for businesses.
+                </p>
+            </div>
+             <!-- Member 8 -->
+             <div>
+                <img src="/files/Shubhangi_photo.jpeg" alt="Shubhangi Manjare" class="w-28 h-28 md:w-32 md:h-32 rounded-full mx-auto mb-6 object-cover shadow-md">
+                <h3 class="text-xl font-semibold text-gray-900">Shubhangi Manjare</h3>
+                <p class="text-gray-700 font-medium mt-2">ERPNext Functional Consultant</p>
+                <p class="text-gray-500 text-sm mt-3">
+                     Experience in developement.Expert in implementing, customizing, and optimizing ERPNext solutions for businesses.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section id="blogs" class="py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <h2 class="text-4xl md:text-5xl font-light text-gray-900 mb-6 tracking-tight">
+      Blogs
+    </h2>
+
+    <p class="text-xl text-gray-600 mb-10 font-light">
+      Featured insights and thought leadership from Vedarth Solutions
+    </p>
+
+    <a 
+      href="https://insightssuccessmagazine.com/satish-aralkar-transforming-indias-erp-landscape-through-open-source-innovation-sap-to-erpnext/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center bg-gray-900 text-white px-8 py-4 rounded-full hover:bg-gray-800 transition-all duration-300"
+    >
+      Read Featured Article →
+    </a>
+  </div>
+</section>
+
+<section id="contact" class="py-16">
+<div class="grid lg:grid-cols-2 gap-12">
+    <!-- Left: Send Us a Message -->
+    <div class="bg-white rounded-3xl shadow-sm p-6 sm:p-10 order-1 lg:order-none">
+        <h3 class="text-2xl font-light text-gray-900 mb-6 tracking-tight">Send Us a Message</h3>
+
+        <div id="success-message" class="hidden mb-6 p-4 bg-green-50 border border-green-200 rounded-xl">
+            <div class="flex items-center">
+                <i data-lucide="check-circle" class="h-4 w-4 text-green-600 mr-2"></i>
+                <span class="text-green-800 font-light">Thank you! Your message has been sent successfully.</span>
+            </div>
+        </div>
+
+        <div class="p-4 sm:p-6 bg-gray-50 rounded-xl">
+            <iframe 
+                src="https://www.vedarthsolutions.com/contact-us/new" 
+                width="100%" 
+                height="750" 
+                frameborder="0"
+                class="rounded-lg border border-gray-200 bg-white"
+                style="padding: 15px; box-sizing: border-box;"
+                title="Contact Form">
+            </iframe>
+        </div>
+    </div>
+
+    <!-- Right: Contact Information -->
+    <div>
+        <h3 class="text-2xl font-light text-gray-900 mb-8 tracking-tight">Contact Information</h3>
+        
+        <div class="space-y-8">
+            <!-- Email -->
+            <div class="flex items-start">
+                <div class="w-12 h-12 bg-gray-200 rounded-xl mr-6 flex items-center justify-center">
+                    <i data-lucide="mail" class="h-5 w-5 text-gray-700"></i>
+                </div>
+                <div>
+                    <h4 class="font-medium text-gray-900 mb-2">Email</h4>
+                    <p class="text-gray-600 font-light">satish@vedarthsolutions.com</p>
+                </div>
+            </div>
+
+            <!-- Phone -->
+            <div class="flex items-start">
+                <div class="w-12 h-12 bg-gray-200 rounded-xl mr-6 flex items-center justify-center">
+                    <i data-lucide="phone" class="h-5 w-5 text-gray-700"></i>
+                </div>
+                <div>
+                    <h4 class="font-medium text-gray-900 mb-2">Phone</h4>
+                    <p class="text-gray-600 font-light">+91 9922432531</p>
+                </div>
+            </div>
+
+            <!-- Address -->
+            <div class="flex items-start">
+                <div class="w-12 h-12 bg-gray-200 rounded-xl mr-6 flex items-center justify-center">
+                    <i data-lucide="map-pin" class="h-5 w-5 text-gray-700"></i>
+                </div>
+                <div>
+                    <h4 class="font-medium text-gray-900 mb-2">Address</h4>
+                    <p class="text-gray-600 font-light">C1/38, Shirin Garden, ITI Road,</p>
+                    <p class="text-gray-600 font-light">Aundh, Pune, India 411007</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+        <footer class="bg-white border-t border-gray-100 py-16">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+                    <div class="lg:col-span-2">
+                        <div class="flex items-center mb-6">
+                            <!--<i data-lucide="settings" class="h-6 w-6 text-gray-900 mr-3"></i>-->
+                            <span class="text-xl font-medium text-gray-900 tracking-tight">Vedarth Solutions</span>
+                        </div>
+                        <p class="text-gray-600 mb-8 max-w-md font-light leading-relaxed">
+                            Your trusted ERPNext implementation partner specializing in manufacturing solutions. Transforming businesses with 50+ successful projects across diverse industries.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-900 mb-6">Services</h3>
+                        <ul class="space-y-3 text-gray-600 font-light">
+                            <li><a href="#" class="hover:text-gray-900 transition-colors duration-200">ERPNext Implementation</a></li>
+                            <li><a href="#" class="hover:text-gray-900 transition-colors duration-200">Manufacturing Setup</a></li>
+                            <li><a href="#" class="hover:text-gray-900 transition-colors duration-200">Custom Development</a></li>
+                            <li><a href="#" class="hover:text-gray-900 transition-colors duration-200">Training & Support</a></li>
+                            <li><a href="#" class="hover:text-gray-900 transition-colors duration-200">Process Optimization</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-900 mb-6">Contact</h3>
+                        <div class="space-y-3 text-gray-600 font-light">
+                            <div class="flex items-center">
+                                <i data-lucide="mail" class="h-4 w-4 mr-3"></i>
+                                <span class="text-sm">satish@vedarthsolutions.com</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i data-lucide="phone" class="h-4 w-4 mr-3"></i>
+                                <span class="text-sm">+91 9922432531</span>
+                            </div>
+                            <div class="flex items-start">
+                                <i data-lucide="map-pin" class="h-4 w-4 mr-3 mt-0.5"></i>
+                                <span class="text-sm">C1/38, Shirin Garden, ITI Road<br />Aundh, Pune-India 411007</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-100 mt-12 pt-8 text-center text-gray-500 font-light">
+                    <p>&copy; Vedarth Solutions. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+
+        // Smooth scrolling function
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuBtn && mobileMenu) {
+            let isMenuOpen = false;
+
+            mobileMenuBtn.addEventListener('click', function() {
+                isMenuOpen = !isMenuOpen;
+                
+                if (isMenuOpen) {
+                    mobileMenu.classList.add('open');
+                    mobileMenuBtn.innerHTML = '<i data-lucide="x" class="h-5 w-5"></i>';
+                } else {
+                    mobileMenu.classList.remove('open');
+                    mobileMenuBtn.innerHTML = '<i data-lucide="menu" class="h-5 w-5"></i>';
+                }
+                
+                // Reinitialize icons after DOM change
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+            });
+        }
+
+        function closeMobileMenu() {
+            if (mobileMenu && mobileMenuBtn) {
+                mobileMenu.classList.remove('open');
+                mobileMenuBtn.innerHTML = '<i data-lucide="menu" class="h-5 w-5"></i>';
+                
+                // Reinitialize icons after DOM change
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+            }
+        }
+
+        // Header background change on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (header) {
+                if (window.scrollY > 100) {
+                    header.classList.add('bg-white/95');
+                    header.classList.remove('bg-white/80');
+                } else {
+                    header.classList.add('bg-white/80');
+                    header.classList.remove('bg-white/95');
+                }
+            }
+        });
+    </script>
+    
+
+    
+
+</body>
+</html>
